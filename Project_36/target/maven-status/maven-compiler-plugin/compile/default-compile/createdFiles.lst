@@ -1,0 +1,11 @@
+com/auction/model/User/Seller.class
+com/auction/model/ItemType/Item.class
+com/auction/model/ItemType/Vehicle.class
+com/auction/model/Auction.class
+com/auction/model/Bid.class
+com/auction/model/User/Bidder.class
+com/auction/model/ItemType/Art.class
+com/auction/model/ItemType/Electronics.class
+com/auction/model/User/Admin.class
+com/auction/model/User/User.class
+com/auction/Main.class
