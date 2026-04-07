@@ -32,7 +32,7 @@ public class Auction {
         this.item = item;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.isOpen = LocalDateTime.now().isBefore(endTime);
+        this.isOpen = true;
 
         startAutoClose();
     }
@@ -42,7 +42,13 @@ public class Auction {
             throw new IllegalArgumentException("Bid must not be null");
         }
 
-        if (!isOpen) {
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(startTime)) {
+            throw new IllegalStateException("Auction has not started yet");
+        }
+
+        if (!isOpen || !now.isBefore(endTime)) {
+            closeAuction();
             throw new IllegalStateException("Auction is closed");
         }
 
@@ -66,9 +72,6 @@ public class Auction {
     }
 
     private synchronized void startAutoClose() {
-        if (!isOpen) {
-            return;
-        }
         scheduler = Executors.newSingleThreadScheduledExecutor();
 
         long delay = Duration.between(LocalDateTime.now(), endTime).toMillis();

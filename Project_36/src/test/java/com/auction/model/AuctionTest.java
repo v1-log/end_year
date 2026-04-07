@@ -36,7 +36,7 @@ class AuctionTest {
         auction.placeBid(new Bid(bidder, BigDecimal.valueOf(1100)));
         LocalDateTime after = auction.getEndTime();
 
-        assertTrue(Duration.between(before, after).getSeconds() >= 29);
+        assertTrue(Duration.between(before, after).getSeconds() >= 30);
     }
 
     @Test

@@ -7,14 +7,14 @@ Simple Java auction demo with anti-sniping extension logic.
 - Maven 3.9+
 
 ## Build
-From `/home/runner/work/end_year/end_year/Project_36`:
+From the `Project_36` directory:
 
 ```bash
 mvn clean compile
 ```
 
 ## Run
-From `/home/runner/work/end_year/end_year/Project_36`:
+From the `Project_36` directory:
 
 ```bash
 mvn -q exec:java -Dexec.mainClass="com.auction.Main"
@@ -28,7 +28,7 @@ java -cp target/classes com.auction.Main
 ```
 
 ## Test
-From `/home/runner/work/end_year/end_year/Project_36`:
+From the `Project_36` directory:
 
 ```bash
 mvn test
