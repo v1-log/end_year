@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuctionTest {
-    private static final long SHORT_AUCTION_DURATION_NANOS = 200_000_000L;
+    private static final long SHORT_AUCTION_DURATION_MS = 200L;
     private static final long WAIT_FOR_AUTO_CLOSE_MS = 450L;
 
     @Test
@@ -44,7 +44,11 @@ class AuctionTest {
     @Test
     void shouldAutoCloseAuctionAfterEndTime() throws InterruptedException {
         Item item = new Electronics("Phone", BigDecimal.valueOf(1000));
-        Auction auction = new Auction(item, LocalDateTime.now(), LocalDateTime.now().plusNanos(SHORT_AUCTION_DURATION_NANOS));
+        Auction auction = new Auction(
+                item,
+                LocalDateTime.now(),
+                LocalDateTime.now().plus(Duration.ofMillis(SHORT_AUCTION_DURATION_MS))
+        );
 
         assertTrue(auction.isOpen());
         Thread.sleep(WAIT_FOR_AUTO_CLOSE_MS);

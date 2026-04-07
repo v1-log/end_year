@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class Auction {
     private static final long SNIPING_WINDOW_SECONDS = 10;
     private static final long EXTENSION_SECONDS = 30;
+    private static final Logger LOGGER = Logger.getLogger(Auction.class.getName());
 
     private final Item item;
     private final LocalDateTime startTime;
@@ -59,7 +61,7 @@ public class Auction {
         long secondsLeft = Duration.between(now, endTime).getSeconds();
         if (secondsLeft <= SNIPING_WINDOW_SECONDS) {
             endTime = endTime.plusSeconds(EXTENSION_SECONDS);
-            System.out.println("Auction extended by " + EXTENSION_SECONDS + " seconds!");
+            LOGGER.info("Auction extended by " + EXTENSION_SECONDS + " seconds!");
 
             restartScheduler();
         }
@@ -67,8 +69,7 @@ public class Auction {
         item.setCurrentPrice(bid.getAmount());
         highestBid = bid;
 
-        System.out.println("New highest bid: " + bid.getAmount()
-                + " by " + bid.getBidder().getName());
+        LOGGER.info("New highest bid: " + bid.getAmount() + " by " + bid.getBidder().getName());
     }
 
     private synchronized void startAutoClose() {
@@ -82,7 +83,7 @@ public class Auction {
         }
         scheduler.schedule(() -> {
             closeAuction();
-            System.out.println("Auction closed automatically!");
+            LOGGER.info("Auction closed automatically!");
         }, delay, TimeUnit.MILLISECONDS);
     }
 
