@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuctionTest {
-    private static final long SHORT_AUCTION_DURATION_MS = 200L;
-    private static final long WAIT_FOR_AUTO_CLOSE_MS = 450L;
+    private static final long SHORT_AUCTION_DURATION_MILLIS = 200L;
+    private static final long WAIT_FOR_AUTO_CLOSE_MILLIS = 450L;
 
     @Test
     void shouldRejectLowerOrEqualBid() {
@@ -47,11 +47,11 @@ class AuctionTest {
         Auction auction = new Auction(
                 item,
                 LocalDateTime.now(),
-                LocalDateTime.now().plus(Duration.ofMillis(SHORT_AUCTION_DURATION_MS))
+                LocalDateTime.now().plus(Duration.ofMillis(SHORT_AUCTION_DURATION_MILLIS))
         );
 
         assertTrue(auction.isOpen());
-        Thread.sleep(WAIT_FOR_AUTO_CLOSE_MS);
+        Thread.sleep(WAIT_FOR_AUTO_CLOSE_MILLIS);
         assertFalse(auction.isOpen());
     }
 }
