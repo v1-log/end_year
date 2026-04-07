@@ -56,7 +56,7 @@ public class Auction {
             throw new IllegalArgumentException("Invalid bid: must be higher than current price");
         }
 
-        long secondsLeft = Duration.between(LocalDateTime.now(), endTime).getSeconds();
+        long secondsLeft = Duration.between(now, endTime).getSeconds();
         if (secondsLeft <= SNIPING_WINDOW_SECONDS) {
             endTime = endTime.plusSeconds(EXTENSION_SECONDS);
             System.out.println("Auction extended by " + EXTENSION_SECONDS + " seconds!");
